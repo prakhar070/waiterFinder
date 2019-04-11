@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+
+{% block content %}
+	<div class="jumbotron">
+		<div class="container">
+			<h1>Account</h1>
+			<p>Manage tables and get URLs</p>
+		</div>
+	</div>
+	<div class="container">      
+		<div class="row">        
+			<div class="col-md-12">          
+				<h2>Tables</h2>
+				<h2>Add new table</h2>
+				<form class="form-inline" action="/account/createtable" method="POST">
+					<input type="text" name="tablenumber" placeholder="Table number or name" class="form-control">
+					<input type="submit" value="Create" class="btn btn-primary">
+				</form>
+				<table class="table table_striped">
+					<tr>
+						<th>No.</th>
+						<th>URL</th>
+						<th>Delete</th>	
+					</tr>
+					{%for table in tables%}
+						<form class="form-inline" action="/account/deletetable">
+						<tr>
+							<td>{{table.number}}</td>
+							<td>{{table.url}}</td>
+							<td><input type="submit" value="Delete" class="form-control"></td>
+							<!--keeping a default value for the text field-->
+							<input type="text" name="tableid" value="{{table._id}}" hidden> 
+						</tr>
+						</form>
+					{%endfor%}
+				</table>
+        	</div>          
+        </div>    
+    </div>
+{% endblock %}
+
